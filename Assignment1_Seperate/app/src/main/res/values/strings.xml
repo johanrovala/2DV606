@@ -6,4 +6,20 @@
     <string name="random_number">Random Number</string>
     <string name="app_startup_number">100</string>
     <string name="title_activity_bmi">BMI</string>
+    <string name="bmi_startup_number">0</string>
+
+    <string name="bmi_error_textinput">Input must be a number</string>
+    <string name="bmi_eu_metric">EU Metric</string>
+    <string name="bmi_us_metric">US Metric</string>
+
+    <string name="bmi_eu_meters">meter</string>
+    <string name="bmi_eu_kg">kilogram</string>
+
+    <string name="bmi_us_inches">inches</string>
+    <string name="bmi_us_pounds">pounds</string>
+
+    <string name="bmi_over_30_help">Do you need help?</string>
+    <string name="bmi_over_30_accept_help">Please help me!</string>
+    <string name="bmi_over_30_reject_help">No thanks, im fine!</string>
+
 </resources>
