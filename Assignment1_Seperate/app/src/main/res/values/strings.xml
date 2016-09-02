@@ -22,4 +22,13 @@
     <string name="bmi_over_30_accept_help">Please help me!</string>
     <string name="bmi_over_30_reject_help">No thanks, im fine!</string>
 
+
+    <string name="title_activity_my_countries">MyCountries</string>
+    <string name="welcome_text_my_countries">Welcome to My Countries</string>
+    <string name="menu_add_country">Add Country</string>
+
+
+    <string name="title_activity_add_my_countries">AddMyCountries</string>
+
+
 </resources>
