@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -58,25 +61,31 @@ public class VaxjoWeather extends AppCompatActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+			super.onCreate(savedInstanceState);
 
-        // Initialize the layout
-        setContentView(R.layout.main);
-		// Initialize the toolbar
-		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-		setSupportActionBar(myToolbar);
+			// Initialize the layout
+			setContentView(R.layout.main);
+			// Initialize the toolbar
+			Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+			setSupportActionBar(myToolbar);
 
-		listView = (ListView) findViewById(R.id.listview);
+			listView = (ListView) findViewById(R.id.listview);
 
-
-        try {
-        	URL url = new URL("http://www.yr.no/sted/Sverige/Kronoberg/V%E4xj%F6/forecast.xml");
-        	AsyncTask task = new WeatherRetriever().execute(url);
-        } catch (IOException ioe ) {
-    		ioe.printStackTrace();
-    	}
-        
+			if (isDeviceConnected()) {
+				try {
+					URL url = new URL("http://www.yr.no/sted/Sverige/Kronoberg/V%E4xj%F6/forecast.xml");
+					AsyncTask task = new WeatherRetriever().execute(url);
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
     }
+
+	public boolean isDeviceConnected(){
+		ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		return networkInfo != null && networkInfo.isConnectedOrConnecting();
+	}
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -88,7 +97,7 @@ public class VaxjoWeather extends AppCompatActivity {
     	if (this.report != null) {
             /*Print some meta data to the UI for the testing purposes*/
             TextView placeholder = (TextView) findViewById(R.id.placeholder);
-            placeholder.append("Location: " + report.getCity() +  ", " + report.getCountry() + "\n" + "Last Updated: "
+            placeholder.append(report.getCity() +  ", " + report.getCountry() + "\n" + "Last Updated: "
 			+ report.getLastUpdated() + "\n" + "Next Update: " + report.getNextUpdate());
 
         	/* Print location meta data */
@@ -122,7 +131,7 @@ public class VaxjoWeather extends AppCompatActivity {
     			return WeatherHandler.getWeatherReport(urls[0]);
     		} catch (Exception e) {
     			throw new RuntimeException(e);
-    		} 
+    		}
     	}
 
     	protected void onProgressUpdate(Void... progress) {

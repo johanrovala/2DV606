@@ -39,4 +39,8 @@ public class TimeUtils {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(date);
 	}
+
+	public static String getDayOfWeek(Date date){
+		return new SimpleDateFormat("EE").format(date);
+	}
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -36,13 +37,17 @@ public class MyAdapter extends ArrayAdapter<WeatherForecast>{
         if(wf != null){
             TextView dateAndTime = (TextView) row.findViewById(R.id.date_and_time_period);
             TextView weatherType = (TextView) row.findViewById(R.id.weather_type);
+            TextView rain = (TextView) row.findViewById(R.id.rain);
             TextView windSpeed = (TextView) row.findViewById(R.id.wind_speed);
-            TextView tempAndRain = (TextView) row.findViewById(R.id.temp_and_rain);
+            TextView tempAndRain = (TextView) row.findViewById(R.id.temp);
+            ImageView weatherIcon = (ImageView) row.findViewById(R.id.icon_id);
 
-            dateAndTime.setText("From: " + wf.getStartHHMM() + " To: " + wf.getEndHHMM());
+            dateAndTime.setText(wf.getDayOfWeek() + " " + wf.getStartHHMM() + " - " + wf.getEndHHMM());
             weatherType.setText("Weather: " + wf.getWeatherName());
+            rain.setText("Rain: " + wf.getRain());
             windSpeed.setText("Wind: " + wf.getWindDirection() + " Speed: " + wf.getWindSpeed());
-            tempAndRain.setText("Temperature: " + wf.getTemperature() + " Rain: " + wf.getRain());
+            tempAndRain.setText("Temp: " + wf.getTemperature());
+            weatherIcon.setBackgroundResource(wf.getImageId());
 
 
         }

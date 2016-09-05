@@ -5,6 +5,7 @@
  */
 package dv606.weather;
 
+
 import java.util.Date;
 
 /**
@@ -34,6 +35,7 @@ public class WeatherForecast {
 	public String getStartHHMM() {return TimeUtils.getHHMM(startTime);}
 	public String getEndYYMMDD() {return TimeUtils.getYYMMDD(endTime);}
 	public String getEndHHMM() {return TimeUtils.getHHMM(endTime);}
+	public String getDayOfWeek() {return TimeUtils.getDayOfWeek(startTime);}
 	public int getPeriodCode() {return period_code;}
 	/* Weather */
 	public String getWeatherName() {return weather_name;}
@@ -46,6 +48,27 @@ public class WeatherForecast {
 	public String getWindDirectionName() {return direction_name;}
 	public double getWindSpeed() {return wind_speed;}
 	public String getWindSpeedName() {return speed_name;}
+	public int getImageId(){
+		if (weather_code == 1){
+			return R.mipmap.ic_sunny;
+		}
+		if(weather_code == 2 || weather_code == 3){
+			return R.mipmap.ic_cloudy_sunny;
+		}
+		if (weather_code == 4){
+			return R.mipmap.ic_cloudy;
+		}
+		if (weather_code == 5 || weather_code == 6 || weather_code == 41 || weather_code == 40 || weather_code == 41){
+			return R.mipmap.ic_sunny_cloudy_rain;
+		}
+		if (weather_code == 42 || weather_code == 7 || weather_code == 43){
+			return R.mipmap.ic_rain_snow;
+		}
+		if (weather_code == 24 || weather_code == 6 || weather_code == 25){
+			return R.mipmap.ic_thunder_rain;
+		}
+		return R.mipmap.ic_sunny_cloudy_rain;
+	}
 	
 	
 	/* 
@@ -85,6 +108,8 @@ public class WeatherForecast {
 		//System.out.println(num);
 		temperature = Integer.parseInt(num);
 	}
+
+
 	
 	/*
 	 * Diagnostics
