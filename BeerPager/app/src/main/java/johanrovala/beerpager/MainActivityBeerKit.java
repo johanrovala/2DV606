@@ -11,6 +11,10 @@ public class MainActivityBeerKit extends Activity {
 
     ViewPager viewPager;
 
+    /*
+     * Main activity start. Custom pageradapter is set to the viewpager.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

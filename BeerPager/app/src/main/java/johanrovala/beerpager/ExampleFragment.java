@@ -12,8 +12,17 @@ import android.widget.TextView;
  * Created by johanrovala on 08/09/16.
  */
 public class ExampleFragment extends Fragment {
+
+    /*
+     * Key values assigned for the Bundle.
+     */
+
     final static String TITLE = "title",RATING = "rating", BREWERY = "brewery", STYLE = "style", ABV = "abv" , IMAGE = "image", REVIEW = "description";
     private ViewGroup rootView;
+
+    /*
+     * create adds all given values from the parameters to the Bundle 'args'
+     */
 
     public static ExampleFragment create(int title, int rating, int brewery, int style, int abv, int image, int review){
         ExampleFragment newFragment = new ExampleFragment();
@@ -34,6 +43,11 @@ public class ExampleFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.example_fragment, container, false);
         return rootView;
     }
+
+    /*
+     * As the fragment becomes visible for the user, the onStart method is called
+     * loading all the predetermined resources to the View.
+     */
 
     @Override public void onStart(){
         super.onStart();
