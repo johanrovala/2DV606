@@ -5,21 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
  * Created by johanrovala on 08/09/16.
  */
 public class ExampleFragment extends Fragment {
-    final static String HEADER_TEXT = "header_text", BODY_IMAGE = "body_image", DESCRIPTION = "description";
+    final static String TITLE = "title",RATING = "rating", BREWERY = "brewery", STYLE = "style", ABV = "abv" , IMAGE = "image", REVIEW = "description";
     private ViewGroup rootView;
 
-    public static ExampleFragment create(String header, int imageID, String description){
+    public static ExampleFragment create(int title, int rating, int brewery, int style, int abv, int image, int review){
         ExampleFragment newFragment = new ExampleFragment();
         Bundle args = new Bundle();
-        args.putString(HEADER_TEXT, header);
-        args.putInt(BODY_IMAGE, imageID);
-        args.putString(DESCRIPTION, description);
+        args.putInt(TITLE, title);
+        args.putInt(RATING, rating);
+        args.putInt(BREWERY, brewery);
+        args.putInt(STYLE, style);
+        args.putInt(ABV, abv);
+        args.putInt(IMAGE, image);
+        args.putInt(REVIEW, review);
         newFragment.setArguments(args);
         return newFragment;
     }
@@ -33,13 +38,22 @@ public class ExampleFragment extends Fragment {
     @Override public void onStart(){
         super.onStart();
         Bundle args = getArguments();
-        String headerText = args.getString(HEADER_TEXT);
-        int imageID = args.getInt(BODY_IMAGE);
-        String description = args.getString(DESCRIPTION);
+        int title = args.getInt(TITLE);
+        int rating = args.getInt(RATING);
+        int brewery = args.getInt(BREWERY);
+        int style = args.getInt(STYLE);
+        int abv = args.getInt(ABV);
+        int image = args.getInt(IMAGE);
+        int review = args.getInt(REVIEW);
 
 
-        ((TextView) rootView.findViewById(R.id.header_text)).setText(headerText);
-        ((TextView) rootView.findViewById(R.id.second_text)).setText(description);
+        ((TextView) rootView.findViewById(R.id.title)).setText(title);
+        ((TextView) rootView.findViewById(R.id.rating)).setText(rating);
+        ((TextView) rootView.findViewById(R.id.brewery)).setText(brewery);
+        ((TextView) rootView.findViewById(R.id.style)).setText(style);
+        ((TextView) rootView.findViewById(R.id.abv)).setText(abv);
+        ((ImageView) rootView.findViewById(R.id.image)).setBackgroundResource(image);
+        ((TextView) rootView.findViewById(R.id.review)).setText(review);
     }
 
 }

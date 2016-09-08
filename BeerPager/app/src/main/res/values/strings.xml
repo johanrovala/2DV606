@@ -4,6 +4,23 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- String values of all beer titles -->
+    <string name="mornin_delight_title">Mornin Delight</string>
+
+    <!-- String values for all beer ratings -->
+    <string name="mornin_delight_rating">4.7</string>
+
+    <!-- String values for all beer breweries -->
+    <string name="mornin_delight_brewery">Toppling Goliath Brewing Company, Iowa, United States</string>
+    
+    <!-- String values for all beer styles -->
+    <string name="mornin_delight_style">American Double / Imperial Stout</string>
+
+    <!-- String values for all beer ABV's -->
+    <string name="mornin_delight_ABV">12.00 %</string>
+
+    <!-- String values for all beer reviews -->
+    <string name="mornin_delight_review">This was my first time trying Md during the release. Prior to the release, I opened my bcbs 2014/13 and Kbs 15/12 and bcbs vr 2014 to remind myself of what goodness should be. And MD was up there with VR. The aroma/taste reminded me of slow drip coffee from single origin coffee beans blended perfect with maple syrup. The body was perfect as it had a fuller month feel than a Kbs but not as full as a VR. </string>
+
+
 </resources>

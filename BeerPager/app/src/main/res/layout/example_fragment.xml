@@ -6,17 +6,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/header_text"/>
-
+        android:id="@+id/title"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/second_text"/>
-
-    <ImageView
+        android:id="@+id/rating"/>
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" ></ImageView>
-        <!-- Insert drawable resource here --> />
-
-
+        android:layout_height="wrap_content"
+        android:id="@+id/brewery"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/style"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/abv"/>
+    <!-- Since for some reason, my gradle script cannot recognize anything regarding drawable,
+         I have to use mipmap and thereby setting the min height -->
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/review"/>
 </LinearLayout>

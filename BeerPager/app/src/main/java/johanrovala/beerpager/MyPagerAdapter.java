@@ -14,10 +14,9 @@ public class MyPagerAdapter extends FragmentPagerAdapter{
     public MyPagerAdapter(FragmentManager fm){
         super(fm);
 
-        fragments[0] = ExampleFragment.create("First", "1");
-        fragments[1] = ExampleFragment.create("Second", "2");
-        fragments[2] = ExampleFragment.create("Third", "3");
-
+        fragments[0] = ExampleFragment.create(R.string.mornin_delight_title, R.string.mornin_delight_rating, R.string.mornin_delight_brewery, R.string.mornin_delight_style, R.string.mornin_delight_ABV, R.mipmap.ic_mornin_delight, R.string.mornin_delight_review);
+        fragments[1] = ExampleFragment.create(R.string.mornin_delight_title, R.string.mornin_delight_rating, R.string.mornin_delight_brewery, R.string.mornin_delight_style, R.string.mornin_delight_ABV, R.mipmap.ic_mornin_delight, R.string.mornin_delight_review);
+        fragments[2] = ExampleFragment.create(R.string.mornin_delight_title, R.string.mornin_delight_rating, R.string.mornin_delight_brewery, R.string.mornin_delight_style, R.string.mornin_delight_ABV, R.mipmap.ic_mornin_delight, R.string.mornin_delight_review);
     }
 
     @Override
