@@ -3,6 +3,7 @@ package johanrovala.assignment1_seperate;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -10,7 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MyCountries extends Activity {
+public class MyCountries extends AppCompatActivity {
 
     private static ArrayList<String> userCountries = new ArrayList<>();
     private ArrayAdapter<String> adapter;

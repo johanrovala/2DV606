@@ -1,4 +1,4 @@
-package dv606.weather;
+package johanrovala.assignment1_seperate;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
 
 /**
  * Created by johanrovala on 02/09/16.

@@ -4,7 +4,7 @@
  * Jonas Lundberg, LnU
  */
 
-package dv606.weather;
+package johanrovala.assignment1_seperate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,11 +17,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,8 +64,8 @@ public class VaxjoWeather extends AppCompatActivity {
 			// Initialize the layout
 			setContentView(R.layout.main);
 			// Initialize the toolbar
-			Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-			setSupportActionBar(myToolbar);
+		//	Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		//	setSupportActionBar(myToolbar);
 
 			listView = (ListView) findViewById(R.id.listview);
 

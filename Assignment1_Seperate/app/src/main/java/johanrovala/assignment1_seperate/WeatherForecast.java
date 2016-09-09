@@ -3,7 +3,7 @@
  * Created: May 9, 2010
  * Jonas Lundberg, LnU
  */
-package dv606.weather;
+package johanrovala.assignment1_seperate;
 
 
 import java.util.Date;

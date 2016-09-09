@@ -2,6 +2,7 @@ package johanrovala.assignment1_seperate;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,7 +19,7 @@ import java.text.DecimalFormat;
  * in the device calling it's browser with a url to the weightwatchers website.
  */
 
-public class BMI extends Activity {
+public class BMI extends AppCompatActivity {
 
     private boolean properMetricSystem = true;
 

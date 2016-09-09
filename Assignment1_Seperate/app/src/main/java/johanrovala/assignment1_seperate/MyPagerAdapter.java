@@ -1,8 +1,9 @@
-package johanrovala.beerpager;
+package johanrovala.assignment1_seperate;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
+import java.lang.Override;
 
 /**
  * Created by johanrovala on 08/09/16.

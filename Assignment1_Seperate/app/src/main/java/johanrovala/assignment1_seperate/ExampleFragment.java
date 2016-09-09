@@ -1,4 +1,4 @@
-package johanrovala.beerpager;
+package johanrovala.assignment1_seperate;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.lang.Override;
 
 /**
  * Created by johanrovala on 08/09/16.

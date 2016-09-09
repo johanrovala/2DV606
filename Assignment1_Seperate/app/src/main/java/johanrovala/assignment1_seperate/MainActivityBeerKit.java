@@ -1,13 +1,15 @@
-package johanrovala.beerpager;
+package johanrovala.assignment1_seperate;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import java.lang.Override;
 
-public class MainActivityBeerKit extends Activity {
+public class MainActivityBeerKit extends AppCompatActivity {
 
     ViewPager viewPager;
 
