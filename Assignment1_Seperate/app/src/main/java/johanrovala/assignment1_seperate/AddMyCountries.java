@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddMyCountries extends AppCompatActivity {
 
@@ -30,8 +31,13 @@ public class AddMyCountries extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String visitedCountry = yearText.getText() + " " + countryText.getText();
-                MyCountries.addToUserCountries(visitedCountry);
+                String visitedCountry = "";
+                try {
+                    visitedCountry = Integer.valueOf(yearText.getText().toString()) + " " + countryText.getText();
+                    MyCountries.addToUserCountries(visitedCountry);
+                }catch (NumberFormatException e){
+                    Toast.makeText(AddMyCountries.this, R.string.error_input, Toast.LENGTH_SHORT).show();
+                }
                 /*Intent result = new Intent();
                 result.putExtra("result", userCountry);
                 setResult(RESULT_OK, result);

@@ -6,18 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -65,6 +60,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationD
      * is invisible until the back button has been pressed. This was unfortunate but due to
      * time constraints i opted to use the navigation bar activity just to save some time with the
      * listview.
+     *
      */
 
     public void onSectionAttached(int number) {

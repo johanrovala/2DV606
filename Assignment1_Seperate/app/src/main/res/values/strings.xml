@@ -4,6 +4,8 @@
     <string name="hello">Hello World, VaxjoWeather!</string>
     <string name="settings">Settings</string>
 
+    <!-- String values for BMI -->
+
     <string name="random_number">Random Number</string>
     <string name="app_startup_number">100</string>
     <string name="title_activity_bmi">BMI</string>
@@ -23,10 +25,18 @@
     <string name="bmi_over_30_accept_help">Please help me!</string>
     <string name="bmi_over_30_reject_help">No thanks, im fine!</string>
 
+    <!-- String values for my countries -->
 
     <string name="title_activity_my_countries">MyCountries</string>
     <string name="welcome_text_my_countries">Welcome to My Countries</string>
     <string name="menu_add_country">Add Country</string>
+
+    <string name="add_country_back">Back</string>
+    <string name="add_country_add">Add</string>
+    <string name="error_input">Invalid Input</string>
+
+    <string name="hint_year">Year</string>
+    <string name="hint_country">Country</string>
 
 
     <string name="title_activity_add_my_countries">AddMyCountries</string>

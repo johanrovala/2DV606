@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Assignment_2</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- String values for MyCountries -->
+
+    <string name="title_activity_my_countries">MyCountries</string>
+    <string name="welcome_text_my_countries">Welcome to My Countries</string>
+    <string name="menu_add_country">Add Country</string>
+    <string name="country_year_space"> - </string>
+
+    <string name="add_country_back">Back</string>
+    <string name="add_country_add">Add</string>
+    <string name="error_input">Invalid Input</string>
+
+    <string name="hint_year">Year</string>
+    <string name="hint_country">Country</string>
+
+
+    <string name="title_activity_add_my_countries">AddMyCountries</string>
+    <string name="title_activity_updated_country">UpdatedCountry</string>
+
+    <string name="title_activity_update_delete_country_popup">UpdateDeleteCountryPopup</string>
+    <string name="dialog_title">Update or Delete Country</string>
+    <string name="update_button_dialog">Update</string>
+    <string name="delete_button_dialog">Delete</string>
+</resources>

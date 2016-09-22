@@ -1,6 +1,5 @@
 package johanrovala.assignment1_seperate;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ public class MyCountries extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_countries);
-        System.out.println(userCountries.toString());
 
 
         ListView listView = (ListView) findViewById(R.id.listview_test);
@@ -66,9 +64,6 @@ public class MyCountries extends AppCompatActivity {
         userCountries.add(country);
     }
 
-    public static ArrayList getUserCountries(){
-        return userCountries;
-    }
 
     /*
     @Override
