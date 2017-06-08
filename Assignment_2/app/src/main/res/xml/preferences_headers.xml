@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <preference-headers
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <header
+            android:fragment="johanrovala.assignment_2.exercise_1.Preferences"
+            android:title="Settings"
+            android:summary="Simple Preferences" />
+    </preference-headers>

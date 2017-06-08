@@ -30,6 +30,11 @@
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
+            android:name=".exercise_1.PreferencesActivity"
+            android:label="PreferencesActivity"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
             android:name=".exercise_1.UpdateDeleteCountry"
             android:label="@string/title_activity_updated_country" >
         </activity>

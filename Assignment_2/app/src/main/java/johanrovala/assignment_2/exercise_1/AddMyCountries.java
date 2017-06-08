@@ -55,7 +55,6 @@ public class AddMyCountries extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyCountries.class);
                 startActivity(intent);
-
             }
         });
 
@@ -63,7 +62,7 @@ public class AddMyCountries extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu, this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_my_countries, menu);
         return true;
     }

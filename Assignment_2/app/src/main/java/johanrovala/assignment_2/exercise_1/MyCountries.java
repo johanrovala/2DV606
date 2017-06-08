@@ -10,9 +10,11 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +33,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
 
     private SimpleCursorAdapter adapter;
     private int eventID;
+    private String sortPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,14 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
         listView.setAdapter(adapter);
         getLoaderManager().initLoader(LOADER_MANAGER_ID, null, this);
+        preferenceSettings();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        preferenceSettings();
     }
 
     @Override
@@ -62,7 +73,9 @@ public class MyCountries extends Activity implements CalendarProviderClient{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, PreferencesActivity.class);
+            this.startActivityForResult(intent, 0);
+            //return true;
         }
         else if(id == R.id.action_add_country){
             Intent intent = new Intent(this, AddMyCountries.class);
@@ -72,16 +85,12 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         return super.onOptionsItemSelected(item);
     }
 
-   /* public static void addToUserCountries(String country){
-        userCountries.add(country);
-        //addNewEvent(userCountries.get(0), userCountries.get(1));
-    }*/
 
     @Override
     public long getMyCountriesCalendarId() {
         long id = -1;
         Cursor cursor = getContentResolver().query(CALENDARS_LIST_URI, CALENDARS_LIST_PROJECTION, CALENDARS_LIST_SELECTION,
-                                                    CALENDARS_LIST_SELECTION_ARGS, null);
+                CALENDARS_LIST_SELECTION_ARGS, null);
 
         if(!cursor.moveToFirst()){
             Uri uri = asSyncAdapter(CALENDARS_LIST_URI, ACCOUNT_TITLE, CalendarContract.ACCOUNT_TYPE_LOCAL);
@@ -90,7 +99,6 @@ public class MyCountries extends Activity implements CalendarProviderClient{
             cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
             cv.put(CalendarContract.Calendars.NAME, CALENDAR_TITLE);
             cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, CALENDAR_TITLE);
-           // cv.put(CalendarContract.Calendars.CALENDAR_COLOR, yourColor);
             cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_OWNER);
             cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, ACCOUNT_TITLE);
             cv.put(CalendarContract.Calendars.VISIBLE, 1);
@@ -142,6 +150,63 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         getLoaderManager().restartLoader(LOADER_MANAGER_ID, null, this);
     }
 
+    private void preferenceSettings() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // sortingPreferences(SharedPreferences prefs);
+        // colorPreferences(SharedPreferences prefs);
+        // textPreferences(SharedPreferences prefs);
+
+        sortPref = prefs.getString("sortPref", "");
+        switch(sortPref) {
+            case "YEARDESC":
+                sort(1);
+                break;
+            case "YEARASC":
+                sort(2);
+                break;
+            case "COUNTRYDESC":
+                sort(3);
+                break;
+            case "COUNTRYASC":
+                sort(4);
+                break;
+            default:
+                sort(1);
+                break;
+        }
+
+    }
+
+    private void sort(int index) {
+        Bundle bundle = new Bundle();
+        String sort;
+        switch (index) {
+            case 1:
+                sort = CalendarContract.Events.DTSTART + " DESC";
+                break;
+            case 2:
+                sort = CalendarContract.Events.DTSTART + " ASC";
+                break;
+            case 3:
+                sort = CalendarContract.Events.TITLE + " DESC";
+                break;
+            case 4:
+                sort = CalendarContract.Events.TITLE + " ASC";
+                break;
+            default:
+                sort = CalendarContract.Events.DTSTART + " DESC";
+                break;
+
+        }
+        bundle.putString("sortPref", sort);
+        SharedPreferences sortpref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sortpref.edit();
+        editor.putString("sortPref", sort);
+        editor.commit();
+        getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+    }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         switch (id) {
@@ -163,7 +228,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        adapter.swapCursor(null);
     }
 
     static Uri asSyncAdapter(Uri uri, String account, String accountType) {
