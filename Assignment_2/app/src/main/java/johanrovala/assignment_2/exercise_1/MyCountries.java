@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
     private SimpleCursorAdapter adapter;
     private int eventID;
     private String sortPref;
+    public SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         getMyCountriesCalendarId();
 
         ListView listView = (ListView) findViewById(R.id.listview_test);
-        //final String[] test = {EVENTS_LIST_PROJECTION[PROJ_EVENTS_LIST_TITLE_INDEX], EVENTS_LIST_PROJECTION[PROJ_EVENTS_LIST_DTSTART_INDEX]};
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
         listView.setAdapter(adapter);
         getLoaderManager().initLoader(LOADER_MANAGER_ID, null, this);
@@ -61,6 +62,10 @@ public class MyCountries extends Activity implements CalendarProviderClient{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_my_countries, menu);
+        menu.add(0, 1, 0, "Sort by year (desc)");
+        menu.add(0, 2, 1, "Sort by year (asc)");
+        menu.add(0, 3, 2, "Sort by country (desc)");
+        menu.add(0, 4, 3, "Sort by country (asc)");
         return true;
     }
 
@@ -71,15 +76,58 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, PreferencesActivity.class);
-            this.startActivityForResult(intent, 0);
-            //return true;
-        }
-        else if(id == R.id.action_add_country){
-            Intent intent = new Intent(this, AddMyCountries.class);
-            this.startActivityForResult(intent, 0);
+        Bundle bundle = new Bundle();
+        Intent intent;
+        String sorting = "";
+        SharedPreferences sortpref = getSharedPreferences("sortpref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sortpref.edit();
+
+        switch (id) {
+            case R.id.action_settings:
+                intent = new Intent(this, PreferencesActivity.class);
+                this.startActivityForResult(intent, 0);
+                break;
+
+            case R.id.action_add_country:
+                intent = new Intent(this, AddMyCountries.class);
+                this.startActivityForResult(intent, 0);
+                break;
+
+            case 1:
+                sorting = CalendarContract.Events.DTSTART + " DESC";
+                bundle.putString("sortorder", sorting);
+                editor.putInt("sortpref", 1);
+                editor.commit();
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+                editor.apply();
+                break;
+
+            case 2:
+                sorting = CalendarContract.Events.DTSTART + " ASC";
+                bundle.putString("sortorder", sorting);
+                editor.putInt("sortpref", 2);
+                editor.commit();
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+                editor.apply();
+                break;
+
+            case 3:
+                sorting = CalendarContract.Events.TITLE + " DESC";
+                bundle.putString("sortorder", sorting);
+                editor.putInt("sortpref", 3);
+                editor.commit();
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+                editor.apply();
+                break;
+
+            case 4:
+                sorting = CalendarContract.Events.TITLE + " ASC";
+                bundle.putString("sortorder", sorting);
+                editor.putInt("sortpref", 4);
+                editor.commit();
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+                editor.apply();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -151,61 +199,40 @@ public class MyCountries extends Activity implements CalendarProviderClient{
     }
 
     private void preferenceSettings() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // sortingPreferences(SharedPreferences prefs);
         // colorPreferences(SharedPreferences prefs);
         // textPreferences(SharedPreferences prefs);
 
-        sortPref = prefs.getString("sortPref", "");
-        switch(sortPref) {
-            case "YEARDESC":
-                sort(1);
-                break;
-            case "YEARASC":
-                sort(2);
-                break;
-            case "COUNTRYDESC":
-                sort(3);
-                break;
-            case "COUNTRYASC":
-                sort(4);
-                break;
-            default:
-                sort(1);
-                break;
-        }
-
-    }
-
-    private void sort(int index) {
+        int sortpref = prefs.getInt("sortpref", 1);
+        String sort = "";
         Bundle bundle = new Bundle();
-        String sort;
-        switch (index) {
+
+        switch (sortpref) {
             case 1:
-                sort = CalendarContract.Events.DTSTART + " DESC";
+                sort = (CalendarContract.Events.TITLE + " ASC");
+                bundle.putString("sortorder", sort);
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
                 break;
             case 2:
-                sort = CalendarContract.Events.DTSTART + " ASC";
+                sort = CalendarContract.Events.TITLE + " DESC";
+                bundle.putString("sortorder", sort);
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
                 break;
             case 3:
-                sort = CalendarContract.Events.TITLE + " DESC";
+                sort = CalendarContract.Events.DTSTART + " ASC";
+                bundle.putString("sortorder", sort);
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
                 break;
             case 4:
-                sort = CalendarContract.Events.TITLE + " ASC";
-                break;
-            default:
                 sort = CalendarContract.Events.DTSTART + " DESC";
+                bundle.putString("sortorder", sort);
+                getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
                 break;
-
         }
-        bundle.putString("sortPref", sort);
-        SharedPreferences sortpref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sortpref.edit();
-        editor.putString("sortPref", sort);
-        editor.commit();
-        getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+
+
     }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
