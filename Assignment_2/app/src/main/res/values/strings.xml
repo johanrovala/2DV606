@@ -34,19 +34,4 @@
     <string name="dialog_title">Update or Delete Country</string>
     <string name="update_button_dialog">Update</string>
     <string name="delete_button_dialog">Delete</string>
-
-    <string-array name="listArray">
-        <item>Year (Descending)</item>
-        <item>Year (Ascending)</item>
-        <item>Country (Descending)</item>
-        <item>Country (Ascending)</item>
-    </string-array>
-
-    <string-array name="listValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
 </resources>

@@ -39,14 +39,14 @@ public class AddMyCountries extends Activity {
                 try {
                     country = countryText.getText().toString();
                     year = Integer.valueOf(yearText.getText().toString());
+                    Intent result = new Intent();
+                    result.putExtra("YEAR", year);
+                    result.putExtra("COUNTRY", country);
+                    setResult(RESULT_OK, result);
+                    finish();
                 }catch (NumberFormatException e){
                     Toast.makeText(AddMyCountries.this, R.string.error_input, Toast.LENGTH_SHORT).show();
                 }
-                Intent result = new Intent();
-                result.putExtra("YEAR", year);
-                result.putExtra("COUNTRY", country);
-                setResult(RESULT_OK, result);
-                finish();
             }
         });
 
