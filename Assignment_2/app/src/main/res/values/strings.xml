@@ -34,4 +34,25 @@
     <string name="dialog_title">Update or Delete Country</string>
     <string name="update_button_dialog">Update</string>
     <string name="delete_button_dialog">Delete</string>
+
+    <!-- Array values for background colors -->
+    <string name="background_colors_str">Background Colors</string>
+    <string name="background_colors_prefkey">background_colors</string>
+
+    <array name="background_colors_array">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Orange</item>
+    </array>
+
+    <array name="background_colors_values">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Orange</item>
+    </array>
+
+    <!-- Font size boolean -->
+    <string name="OldPeopleMode">Old People Mode</string>
+
+
 </resources>
