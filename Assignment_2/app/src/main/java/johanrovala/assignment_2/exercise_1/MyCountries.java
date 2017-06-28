@@ -49,10 +49,10 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         getMyCountriesCalendarId();
 
         listView = (ListView) findViewById(R.id.listview_test);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
         listView.setAdapter(adapter);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         getPreferences();
     }
 
@@ -93,7 +93,36 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         }
         listView.setBackgroundColor(color);
 
-        
+        // Font styles
+        SharedPreferences fontprefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean changeFont = fontprefs.getBoolean("changefont", false);
+        SharedPreferences fontsizeprefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean changeSize = fontsizeprefs.getBoolean("changesize", false);
+
+        if (changeFont && changeSize){
+            listView = (ListView) findViewById(R.id.listview_test);
+            adapter = new MyCursorAdapter(this, R.layout.country_listview_font_fontsize, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
+            listView.setAdapter(adapter);
+        }
+        else if(changeFont){
+            listView = (ListView) findViewById(R.id.listview_test);
+            adapter = new MyCursorAdapter(this, R.layout.country_listview_font, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
+            listView.setAdapter(adapter);
+        }
+        else if(changeSize){
+            listView = (ListView) findViewById(R.id.listview_test);
+            adapter = new MyCursorAdapter(this, R.layout.country_listview_fontsize, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
+            listView.setAdapter(adapter);
+        }
+        else {
+            listView = (ListView) findViewById(R.id.listview_test);
+            adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
+            listView.setAdapter(adapter);
+        }
+
+
+
+
     }
 
     private void updateSortingPreferences(String sorting) {
@@ -334,15 +363,12 @@ public class MyCountries extends Activity implements CalendarProviderClient{
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //UpdateDeleteCountryDialog dialog = new UpdateDeleteCountryDialog();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("ÖHHH");
                     builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(context, UpdateDeleteCountry.class);
                             System.out.println("ID in viewclick: " + id);
-                          //  intent.putExtra("ID", id);
                             eventID = id;
                             startActivityForResult(intent, 1);
 

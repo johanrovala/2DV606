@@ -6,4 +6,15 @@
         android:defaultValue="false"
         android:entries="@array/background_colors_array"
         android:entryValues="@array/background_colors_values"/>
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="changefont"
+        android:title="Change Font"
+        />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="changesize"
+        android:title="Old People Mode"
+        />
 </PreferenceScreen>
