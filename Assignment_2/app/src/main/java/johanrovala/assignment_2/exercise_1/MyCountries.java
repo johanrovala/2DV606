@@ -39,6 +39,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
     private final String BGPREFERENCE = "bgpref";
     private final String BGCOLOR = "background_colors";
     private SharedPreferences prefs;
+    public ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         setContentView(R.layout.activity_my_countries);
         getMyCountriesCalendarId();
 
-        ListView listView = (ListView) findViewById(R.id.listview_test);
+        listView = (ListView) findViewById(R.id.listview_test);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
         listView.setAdapter(adapter);
@@ -72,16 +73,27 @@ public class MyCountries extends Activity implements CalendarProviderClient{
         }
 
         // Background colors
-        SharedPreferences bgprefs = getSharedPreferences(BGPREFERENCE, MODE_PRIVATE);
+        SharedPreferences bgprefs = PreferenceManager.getDefaultSharedPreferences(this);
         String bgColor = bgprefs.getString(BGCOLOR, "");
-        if (bgColor != null) {
-            Log.v(TAG, "Background color preferences retrieved.");
-            bundle.putString(BGCOLOR, bgColor);
-            getLoaderManager().restartLoader(LOADER_MANAGER_ID, bundle, this);
+        int color;
+        System.out.println("Fetched color string: " + bgColor);
+        switch (bgColor){
+            case "Blue":
+                color = getResources().getColor(R.color.Blue);
+                break;
+            case "Red":
+                color = getResources().getColor(R.color.Red);
+                break;
+            case "Orange":
+                color = getResources().getColor(R.color.Orange);
+                break;
+            default:
+                color= getResources().getColor(R.color.Default);
+                break;
         }
-        else {
-            Log.v(TAG, "Background color preferences retrieval failed.");
-        }
+        listView.setBackgroundColor(color);
+
+        
     }
 
     private void updateSortingPreferences(String sorting) {
