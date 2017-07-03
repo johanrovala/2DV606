@@ -1,4 +1,4 @@
-package johanrovala.assignment_2.exercise_1;
+package johanrovala.assignment_2.MyCountries;
 
 import java.util.Calendar;
 import java.util.TimeZone;

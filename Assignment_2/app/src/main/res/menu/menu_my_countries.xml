@@ -1,6 +1,6 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="johanrovala.assignment_2.exercise_1.MyCountries">
+    tools:context="johanrovala.assignment_2.MyCountries.MyCountries">
 
     <item android:id="@+id/action_add_country"
           android:title="@string/menu_add_country"

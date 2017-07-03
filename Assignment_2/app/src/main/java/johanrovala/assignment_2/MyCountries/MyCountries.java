@@ -1,4 +1,4 @@
-package johanrovala.assignment_2.exercise_1;
+package johanrovala.assignment_2.MyCountries;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -306,20 +306,16 @@ public class MyCountries extends Activity implements CalendarProviderClient{
     protected void onActivityResult(int requestCode, int resultCode, Intent result){
         String country = "";
         int year = 0;
-        System.out.println("onActivityResult");
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case 0:
-                    System.out.println("case 0");
                     country = result.getStringExtra("COUNTRY");
                     year = result.getIntExtra("YEAR", 0);
                     addNewEvent(year, country);
                     break;
                 case 1:
-                    System.out.println("case 1");
                     country = result.getStringExtra("COUNTRY");
                     year = result.getIntExtra("YEAR", 0);
-                    System.out.println("ID in cas 1: " + eventID);
                     updateEvent(eventID, year, country);
             }
         }

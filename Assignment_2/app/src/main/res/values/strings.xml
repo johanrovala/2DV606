@@ -53,6 +53,10 @@
 
     <!-- Font size boolean -->
     <string name="OldPeopleMode">Old People Mode</string>
+    <string name="title_activity_alarm_clock">AlarmClock</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_alarm_clock_setup">AlarmClockSetup</string>
 
 
 </resources>

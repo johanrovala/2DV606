@@ -1,4 +1,4 @@
-package johanrovala.assignment_2.exercise_1;
+package johanrovala.assignment_2.MyCountries;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,9 +39,14 @@ public class UpdateDeleteCountry extends Activity {
                 Intent result = new Intent();
                 result.putExtra("YEAR", year);
                 result.putExtra("COUNTRY", country);
-                System.out.println("ID: " + result.getExtras().get("ID"));
                 setResult(RESULT_OK, result);
-                System.out.println("result set");
+                finish();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

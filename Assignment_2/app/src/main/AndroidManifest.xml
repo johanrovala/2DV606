@@ -20,27 +20,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".exercise_1.MyCountries"
+            android:name=".MyCountries.MyCountries"
             android:label="@string/title_activity_my_countries"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
-            android:name=".exercise_1.AddMyCountries"
+            android:name=".MyCountries.AddMyCountries"
             android:label="@string/title_activity_add_my_countries"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
-            android:name=".exercise_1.PreferencesActivity"
+            android:name=".MyCountries.PreferencesActivity"
             android:label="PreferencesActivity"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
-            android:name=".exercise_1.UpdateDeleteCountry"
+            android:name=".MyCountries.UpdateDeleteCountry"
             android:label="@string/title_activity_updated_country" >
         </activity>
         <activity
-            android:name=".exercise_1.UpdateDeleteCountryDialog"
+            android:name=".MyCountries.UpdateDeleteCountryDialog"
             android:label="@string/title_activity_update_delete_country_popup" >
+        </activity>
+        <activity
+            android:name=".AlarmClock.AlarmClock"
+            android:label="@string/title_activity_alarm_clock" >
+        </activity>
+        <activity
+            android:name=".AlarmClock.AlarmClockSetup"
+            android:label="@string/title_activity_alarm_clock_setup" >
         </activity>
     </application>
 
