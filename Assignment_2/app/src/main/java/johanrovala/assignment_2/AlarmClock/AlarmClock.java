@@ -1,6 +1,8 @@
 package johanrovala.assignment_2.AlarmClock;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import johanrovala.assignment_2.R;
 
@@ -71,15 +76,30 @@ public class AlarmClock extends Activity {
 
     private void setAlarmFromSetupResult(String hours, String minutes) {
 
-        //SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        //String timeString = alarmHourString + ":" + alarmMinuteString + ":00";
-        //format.format(timeString);
+        /*SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+        Date d = cal.getTime();
+        format.format(d);*/
 
+        long durationTime = 1000*3 + System.currentTimeMillis();
+        System.out.println("actual time: " + durationTime);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("message", "The alarm has started");
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmClock.this, 0, intent, 0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, durationTime, pendingIntent);
+        Toast.makeText(this, "Alarm has been set", Toast.LENGTH_LONG).show();
     }
 
     private void startAlarmSetUp() {
         Intent intent = new Intent(getBaseContext(), AlarmClockSetup.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
 
@@ -87,19 +107,19 @@ public class AlarmClock extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent result){
         String hours = "";
         String minutes = "";
+        System.out.println("RESULT OK in AlarmClock" + RESULT_OK);
         if(resultCode == RESULT_OK){
-            switch (requestCode){
-                case 0:
-                    hours = result.getStringExtra(HOUR);
-                    minutes = result.getStringExtra(MINUTES);
-                    setAlarmFromSetupResult(hours, minutes);
-                    break;
-                default:
-                    System.out.println("Error when fetching result from alarm setup");
-                    break;
-            }
+            hours = result.getStringExtra(HOUR);
+            minutes = result.getStringExtra(MINUTES);
+            System.out.println("hours: " + hours);
+            System.out.println("minutes: " + minutes);
+            setAlarmFromSetupResult(hours, minutes);
+        }
+        else {
+            System.out.println("Error when fetching result from alarm setup");
         }
     }
+
 
 
 

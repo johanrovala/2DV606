@@ -119,10 +119,6 @@ public class MyCountries extends Activity implements CalendarProviderClient{
             adapter = new MyCursorAdapter(this, R.layout.country_listview, null, EVENTS_LIST_PROJECTION, new int[]{R.id.year_id}, 0);
             listView.setAdapter(adapter);
         }
-
-
-
-
     }
 
     private void updateSortingPreferences(String sorting) {

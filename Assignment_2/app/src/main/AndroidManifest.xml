@@ -50,6 +50,11 @@
             android:name=".AlarmClock.AlarmClockSetup"
             android:label="@string/title_activity_alarm_clock_setup" >
         </activity>
+        <receiver
+            android:name=".AlarmClock.AlarmReceiver"
+            android:enabled="true"
+            android:process=":remote">
+        </receiver>
     </application>
 
 </manifest>

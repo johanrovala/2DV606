@@ -41,6 +41,7 @@ public class AlarmClockSetup extends Activity {
             public void onClick(View v) {
                 String alarmHourString = String.valueOf(hourInput.getText());
                 String alarmMinuteString = String.valueOf(minuteInput.getText());
+                System.out.println("In AlarmClockSetup Button" + RESULT_OK);
 
                 Intent intent = new Intent();
                 intent.putExtra(HOUR, alarmHourString);
