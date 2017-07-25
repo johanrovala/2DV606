@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import johanrovala.assignment_2.AlarmClock.AlarmClock;
+import johanrovala.assignment_2.MP3Player.MP3Player;
 import johanrovala.assignment_2.MyCountries.MyCountries;
 
 public class MainActivity extends Activity
@@ -60,10 +62,12 @@ public class MainActivity extends Activity
                 startActivity(intent);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                Intent intent1 = new Intent(this, AlarmClock.class);
+                startActivity(intent1);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                Intent intent2 = new Intent(this, MP3Player.class);
+                startActivity(intent2);
                 break;
         }
     }

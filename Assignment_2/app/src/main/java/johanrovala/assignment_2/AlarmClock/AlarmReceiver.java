@@ -8,11 +8,20 @@ import android.widget.Toast;
 /**
  * Created by johanrovala on 12/07/17.
  */
-public class AlarmReceiver extends BroadcastReceiver{
+
+public class AlarmReceiver extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
         String msg = intent.getStringExtra("message");
         System.out.println(msg);
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context ,msg ,Toast.LENGTH_SHORT).show();
+
+        Intent dialogIntent = new Intent(context, AlarmDialogActivity.class);
+        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(dialogIntent);
     }
 }
+
+

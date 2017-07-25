@@ -34,6 +34,8 @@ public class AlarmClock extends Activity {
     private TextView currentTime;
     private TextView alarmTime;
     private Button setAlarmButton;
+    private Button cancelAlarmButton;
+    private Button updateAlarmButton;
     private Handler timeUpdater;
 
     @Override
@@ -49,11 +51,37 @@ public class AlarmClock extends Activity {
         currentTime = (TextView) findViewById(R.id.currenttime_textview);
         alarmTime = (TextView) findViewById(R.id.alarmtime_textview);
         setAlarmButton = (Button) findViewById(R.id.set_alarm_button);
+        cancelAlarmButton = (Button) findViewById(R.id.cancel_alarm_button);
+        updateAlarmButton = (Button) findViewById(R.id.update_alarm_button);
 
         setAlarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startAlarmSetUp();
+            }
+        });
+        cancelAlarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarmIsSet()){
+                    cancelAlarm();
+                }
+                else{
+                    String message = "No alarm is set.";
+                    Toast.makeText(AlarmClock.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        updateAlarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarmIsSet()){
+                    cancelAlarm();
+                    startAlarmSetUp();                }
+                else{
+                    String message = "No alarm is set.";
+                    Toast.makeText(AlarmClock.this, message, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -76,25 +104,49 @@ public class AlarmClock extends Activity {
 
     private void setAlarmFromSetupResult(String hours, String minutes) {
 
-        /*SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        // Config alarm
+
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("message", "Alarm has executed");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        // Config time
+
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
         cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
-        Date d = cal.getTime();
-        format.format(d);*/
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-        long durationTime = 1000*3 + System.currentTimeMillis();
-        System.out.println("actual time: " + durationTime);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.putExtra("message", "The alarm has started");
+        Date date = cal.getTime();
+        long endTime = date.getTime();
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmClock.this, 0, intent, 0);
+        // Schedule alarm
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, durationTime, pendingIntent);
-        Toast.makeText(this, "Alarm has been set", Toast.LENGTH_LONG).show();
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, endTime, pendingIntent);
+
+        // Notify user
+        System.out.println("Success");
+        String message = "The alarm will go off at: " + date.getHours() + ":" + date.getMinutes();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void cancelAlarm(){
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+        String message = "The alarm was canceled";
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        System.out.println("Alarm canceled.");
+    }
+
+
+    private boolean alarmIsSet(){
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        return (PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
     }
 
     private void startAlarmSetUp() {
@@ -107,46 +159,18 @@ public class AlarmClock extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent result){
         String hours = "";
         String minutes = "";
-        System.out.println("RESULT OK in AlarmClock" + RESULT_OK);
+        System.out.println(resultCode);
+        System.out.println(RESULT_OK);
         if(resultCode == RESULT_OK){
+            System.out.println("RESULT_OK");
             hours = result.getStringExtra(HOUR);
             minutes = result.getStringExtra(MINUTES);
-            System.out.println("hours: " + hours);
-            System.out.println("minutes: " + minutes);
             setAlarmFromSetupResult(hours, minutes);
         }
-        else {
+        else{
             System.out.println("Error when fetching result from alarm setup");
         }
     }
-
-
-
-
-
-    /*
-     * Not Important, might remove later.
-     */
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_alarm_clock, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
+
+
